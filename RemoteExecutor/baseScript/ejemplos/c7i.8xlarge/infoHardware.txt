@@ -1,0 +1,843 @@
+summaraws
+    description: Computer
+    product: c7i.8xlarge
+    vendor: Amazon EC2
+    serial: ec21dd5c-d2cf-4087-df14-69895ac0bf94
+    width: 64 bits
+    capabilities: smbios-2.7 dmi-2.7 smp vsyscall32
+    configuration: uuid=ec21dd5c-d2cf-4087-df14-69895ac0bf94
+  *-core
+       description: Motherboard
+       vendor: Amazon EC2
+       physical id: 0
+     *-firmware
+          description: BIOS
+          vendor: Amazon EC2
+          physical id: 1
+          version: 1.0
+          date: 10/16/2017
+          size: 64KiB
+          capacity: 64KiB
+          capabilities: pci edd acpi virtualmachine
+     *-cpu
+          description: CPU
+          product: Intel(R) Xeon(R) Platinum 8488C
+          vendor: Intel Corp.
+          physical id: 4
+          bus info: cpu@0
+          version: 6.143.8
+          slot: CPU 0
+          size: 2400MHz
+          capacity: 4GHz
+          width: 64 bits
+          clock: 100MHz
+          capabilities: lm fpu fpu_exception wp vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp x86-64 constant_tsc arch_perfmon rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq monitor ssse3 fma cx16 pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch ssbd ibrs ibpb stibp ibrs_enhanced fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 wbnoinvd ida arat avx512vbmi umip pku ospke waitpkg avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg tme avx512_vpopcntdq rdpid cldemote movdiri movdir64b md_clear serialize amx_bf16 avx512_fp16 amx_tile amx_int8 flush_l1d arch_capabilities
+          configuration: cores=16 enabledcores=16 microcode=721421777 threads=32
+        *-cache:0
+             description: L1 cache
+             physical id: 5
+             slot: L1-Cache
+             size: 3840KiB
+             capacity: 3840KiB
+             capabilities: synchronous internal write-back unified
+             configuration: level=1
+        *-cache:1
+             description: L2 cache
+             physical id: 6
+             slot: L2-Cache
+             size: 96MiB
+             capacity: 96MiB
+             capabilities: synchronous internal varies unified
+             configuration: level=2
+        *-cache:2
+             description: L3 cache
+             physical id: 7
+             slot: L3-Cache
+             size: 105MiB
+             capacity: 105MiB
+             capabilities: synchronous internal varies unified
+             configuration: level=3
+     *-memory
+          description: System Memory
+          physical id: 8
+          slot: System board or motherboard
+          size: 64GiB
+        *-bank
+             description: DIMM Fast-paged RAMBUS Window DRAM 4800 MHz (0.2 ns)
+             physical id: 0
+             size: 64GiB
+             width: 64 bits
+             clock: 505MHz (2.0ns)
+     *-pci:0
+          description: Host bridge
+          product: 440FX - 82441FX PMC [Natoma]
+          vendor: Intel Corporation
+          physical id: 100
+          bus info: pci@0000:00:00.0
+          version: 00
+          width: 32 bits
+          clock: 33MHz
+        *-isa
+             description: ISA bridge
+             product: 82371SB PIIX3 ISA [Natoma/Triton II]
+             vendor: Intel Corporation
+             physical id: 1
+             bus info: pci@0000:00:01.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: isa bus_master
+             configuration: latency=0
+           *-pnp00:00
+                product: PnP device PNP0b00
+                physical id: 0
+                capabilities: pnp
+                configuration: driver=rtc_cmos
+           *-pnp00:01
+                product: PnP device PNP0303
+                physical id: 1
+                capabilities: pnp
+                configuration: driver=i8042 kbd
+           *-pnp00:02
+                product: PnP device PNP0f13
+                physical id: 2
+                capabilities: pnp
+                configuration: driver=i8042 aux
+           *-pnp00:03
+                product: PnP device PNP0400
+                physical id: 3
+                capabilities: pnp
+           *-pnp00:04
+                product: PnP device PNP0501
+                physical id: 4
+                capabilities: pnp
+                configuration: driver=serial
+        *-generic UNCLAIMED
+             description: Non-VGA unclassified device
+             product: 82371AB/EB/MB PIIX4 ACPI
+             vendor: Intel Corporation
+             physical id: 1.3
+             bus info: pci@0000:00:01.3
+             version: 08
+             width: 32 bits
+             clock: 33MHz
+             capabilities: bus_master
+             configuration: latency=0
+        *-display UNCLAIMED
+             description: VGA compatible controller
+             product: Amazon.com, Inc.
+             vendor: Amazon.com, Inc.
+             physical id: 3
+             bus info: pci@0000:00:03.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: vga_controller bus_master
+             configuration: latency=0
+             resources: memory:c0000000-c03fffff memory:c0000-dffff
+        *-nvme
+             description: NVMe device
+             product: Amazon Elastic Block Store
+             vendor: Amazon.com, Inc.
+             physical id: 4
+             bus info: pci@0000:00:04.0
+             logical name: /dev/nvme0
+             version: 2.0
+             serial: vol0633ca92cd08b6974
+             width: 32 bits
+             clock: 33MHz
+             capabilities: nvme pciexpress msix nvm_express bus_master cap_list
+             configuration: driver=nvme latency=0 nqn=nqn:2008-08.com.amazon.aws:ebs:vol0633ca92cd08b6974 state=live
+             resources: irq:0 memory:c0400000-c0403fff
+           *-namespace:0
+                description: NVMe disk
+                physical id: 0
+                logical name: hwmon0
+           *-namespace:1
+                description: NVMe disk
+                physical id: 2
+                logical name: /dev/ng0n1
+           *-namespace:2
+                description: NVMe disk
+                physical id: 1
+                bus info: nvme@0:1
+                logical name: /dev/nvme0n1
+                size: 60GiB (64GB)
+                capabilities: gpt-1.00 partitioned partitioned:gpt
+                configuration: guid=8f27ec90-814b-448c-88e6-b35d88412452 logicalsectorsize=512 sectorsize=4096 wwid=uuid.61b84bfa-a16c-5e82-bb90-8c56830f309c
+              *-volume:0
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 1
+                   bus info: nvme@0:1,1
+                   logical name: /dev/nvme0n1p1
+                   logical name: /
+                   version: 1.0
+                   serial: 6387caa1-122f-48bc-b447-9f1386d06e06
+                   size: 58GiB
+                   capacity: 58GiB
+                   capabilities: journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                   configuration: created=2024-04-23 11:29:02 filesystem=ext4 label=cloudimg-rootfs lastmountpoint=/ modified=2024-10-15 21:43:38 mount.fstype=ext4 mount.options=rw,relatime,discard,errors=remount-ro,commit=30 mounted=2024-10-15 22:06:56 state=mounted
+              *-volume:1
+                   description: BIOS Boot partition
+                   vendor: EFI
+                   physical id: e
+                   bus info: nvme@0:1,14
+                   logical name: /dev/nvme0n1p14
+                   serial: fe377eaf-b08e-4dfe-8d68-78ceaea8715f
+                   capacity: 4095KiB
+                   capabilities: nofs
+              *-volume:2
+                   description: Windows FAT volume
+                   vendor: mkfs.fat
+                   physical id: f
+                   bus info: nvme@0:1,15
+                   logical name: /dev/nvme0n1p15
+                   logical name: /boot/efi
+                   version: FAT32
+                   serial: 3cc2-c362
+                   size: 100MiB
+                   capacity: 105MiB
+                   capabilities: boot fat initialized
+                   configuration: FATs=2 filesystem=fat label=UEFI mount.fstype=vfat mount.options=rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro state=mounted
+              *-volume:3
+                   description: EXT4 volume
+                   vendor: Linux
+                   physical id: 10
+                   bus info: nvme@0:1,16
+                   logical name: /dev/nvme0n1p16
+                   logical name: /boot
+                   version: 1.0
+                   serial: 9d39f3ff-b465-4c20-9ec1-06182226356c
+                   size: 913MiB
+                   capacity: 913MiB
+                   capabilities: journaled extended_attributes large_files huge_files dir_nlink recover 64bit extents ext4 ext2 initialized
+                   configuration: created=2024-04-23 11:29:16 filesystem=ext4 label=BOOT lastmountpoint=/boot modified=2024-10-15 22:06:57 mount.fstype=ext4 mount.options=rw,relatime mounted=2024-10-15 22:06:57 state=mounted
+     *-pci:1
+          description: PCI bridge
+          product: Amazon.com, Inc.
+          vendor: Amazon.com, Inc.
+          physical id: 101
+          bus info: pci@0000:01:00.0
+          version: 00
+          width: 32 bits
+          clock: 33MHz
+          capabilities: pci msix pciexpress normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: irq:0 memory:c4000000-c40003ff memory:c4100000-c82fffff ioport:1082000000(size=536870912)
+        *-pci
+             description: PCI bridge
+             product: Amazon.com, Inc.
+             vendor: Amazon.com, Inc.
+             physical id: 0
+             bus info: pci@0000:02:00.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci msix pciexpress normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:0 memory:c4100000-c41003ff memory:c4200000-c82fffff ioport:1082000000(size=536870912)
+           *-pci:0
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0
+                bus info: pci@0000:03:00.0
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4200000-c42003ff memory:c4300000-c44fffff ioport:1082000000(size=16777216)
+           *-pci:1
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0.1
+                bus info: pci@0000:03:00.1
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4200400-c42007ff memory:c4500000-c46fffff ioport:1083000000(size=16777216)
+           *-pci:2
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0.2
+                bus info: pci@0000:03:00.2
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4200800-c4200bff memory:c4700000-c48fffff ioport:1084000000(size=16777216)
+           *-pci:3
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0.3
+                bus info: pci@0000:03:00.3
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4200c00-c4200fff memory:c4900000-c4afffff ioport:1085000000(size=16777216)
+           *-pci:4
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0.4
+                bus info: pci@0000:03:00.4
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4201000-c42013ff memory:c4b00000-c4cfffff ioport:1086000000(size=16777216)
+           *-pci:5
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0.5
+                bus info: pci@0000:03:00.5
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4201400-c42017ff memory:c4d00000-c4efffff ioport:1087000000(size=16777216)
+           *-pci:6
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0.6
+                bus info: pci@0000:03:00.6
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4201800-c4201bff memory:c4f00000-c50fffff ioport:1088000000(size=16777216)
+           *-pci:7
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0.7
+                bus info: pci@0000:03:00.7
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4201c00-c4201fff memory:c5100000-c52fffff ioport:1089000000(size=16777216)
+           *-pci:8
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 1
+                bus info: pci@0000:03:01.0
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4202000-c42023ff memory:c5300000-c54fffff ioport:108a000000(size=16777216)
+           *-pci:9
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 1.1
+                bus info: pci@0000:03:01.1
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4202400-c42027ff memory:c5500000-c56fffff ioport:108b000000(size=16777216)
+           *-pci:10
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 1.2
+                bus info: pci@0000:03:01.2
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4202800-c4202bff memory:c5700000-c58fffff ioport:108c000000(size=16777216)
+           *-pci:11
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 1.3
+                bus info: pci@0000:03:01.3
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4202c00-c4202fff memory:c5900000-c5afffff ioport:108d000000(size=16777216)
+           *-pci:12
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 1.4
+                bus info: pci@0000:03:01.4
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4203000-c42033ff memory:c5b00000-c5cfffff ioport:108e000000(size=16777216)
+           *-pci:13
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 1.5
+                bus info: pci@0000:03:01.5
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4203400-c42037ff memory:c5d00000-c5efffff ioport:108f000000(size=16777216)
+           *-pci:14
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 1.6
+                bus info: pci@0000:03:01.6
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4203800-c4203bff memory:c5f00000-c60fffff ioport:1090000000(size=16777216)
+           *-pci:15
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 1.7
+                bus info: pci@0000:03:01.7
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4203c00-c4203fff memory:c6100000-c62fffff ioport:1091000000(size=16777216)
+           *-pci:16
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 2
+                bus info: pci@0000:03:02.0
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4204000-c42043ff memory:c6300000-c64fffff ioport:1092000000(size=16777216)
+           *-pci:17
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 2.1
+                bus info: pci@0000:03:02.1
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4204400-c42047ff memory:c6500000-c66fffff ioport:1093000000(size=16777216)
+           *-pci:18
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 2.2
+                bus info: pci@0000:03:02.2
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4204800-c4204bff memory:c6700000-c68fffff ioport:1094000000(size=16777216)
+           *-pci:19
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 2.3
+                bus info: pci@0000:03:02.3
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4204c00-c4204fff memory:c6900000-c6afffff ioport:1095000000(size=16777216)
+           *-pci:20
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 2.4
+                bus info: pci@0000:03:02.4
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4205000-c42053ff memory:c6b00000-c6cfffff ioport:1096000000(size=16777216)
+           *-pci:21
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 2.5
+                bus info: pci@0000:03:02.5
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4205400-c42057ff memory:c6d00000-c6efffff ioport:1097000000(size=16777216)
+           *-pci:22
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 2.6
+                bus info: pci@0000:03:02.6
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4205800-c4205bff memory:c6f00000-c70fffff ioport:1098000000(size=16777216)
+           *-pci:23
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 2.7
+                bus info: pci@0000:03:02.7
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4205c00-c4205fff memory:c7100000-c72fffff ioport:1099000000(size=16777216)
+           *-pci:24
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 3
+                bus info: pci@0000:03:03.0
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4206000-c42063ff memory:c7300000-c74fffff ioport:109a000000(size=16777216)
+           *-pci:25
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 3.1
+                bus info: pci@0000:03:03.1
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4206400-c42067ff memory:c7500000-c76fffff ioport:109b000000(size=16777216)
+           *-pci:26
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 3.2
+                bus info: pci@0000:03:03.2
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4206800-c4206bff memory:c7700000-c78fffff ioport:109c000000(size=16777216)
+           *-pci:27
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 3.3
+                bus info: pci@0000:03:03.3
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4206c00-c4206fff memory:c7900000-c7afffff ioport:109d000000(size=16777216)
+           *-pci:28
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 3.4
+                bus info: pci@0000:03:03.4
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4207000-c42073ff memory:c7b00000-c7cfffff ioport:109e000000(size=16777216)
+           *-pci:29
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 3.5
+                bus info: pci@0000:03:03.5
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4207400-c42077ff memory:c7d00000-c7efffff ioport:109f000000(size=16777216)
+           *-pci:30
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 3.6
+                bus info: pci@0000:03:03.6
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4207800-c4207bff memory:c7f00000-c80fffff ioport:10a0000000(size=16777216)
+           *-pci:31
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 3.7
+                bus info: pci@0000:03:03.7
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c4207c00-c4207fff memory:c8100000-c82fffff ioport:10a1000000(size=16777216)
+              *-nvme
+                   description: NVMe device
+                   product: Amazon Elastic Block Store
+                   vendor: Amazon.com, Inc.
+                   physical id: 0
+                   bus info: pci@0000:23:00.0
+                   logical name: /dev/nvme1
+                   version: 2.0
+                   serial: vol0969290734f961f0f
+                   width: 32 bits
+                   clock: 33MHz
+                   capabilities: nvme pciexpress msix nvm_express bus_master cap_list
+                   configuration: driver=nvme latency=0 nqn=nqn:2008-08.com.amazon.aws:ebs:vol0969290734f961f0f state=live
+                   resources: irq:0 memory:c8100000-c8103fff
+                 *-namespace:0
+                      description: NVMe disk
+                      physical id: 0
+                      logical name: hwmon1
+                 *-namespace:1
+                      description: NVMe disk
+                      physical id: 2
+                      logical name: /dev/ng1n1
+                 *-namespace:2
+                      description: NVMe disk
+                      physical id: 1
+                      bus info: nvme@1:1
+                      logical name: /dev/nvme1n1
+                      size: 4200GiB (4509GB)
+                      capabilities: gpt-1.00 partitioned partitioned:gpt
+                      configuration: guid=61ddfc2e-7e6a-3b42-9f6b-1d95ffef665f logicalsectorsize=512 sectorsize=4096 wwid=uuid.077cfe07-bcdc-5c01-9e95-506031945f0b
+                    *-volume
+                         description: EFI partition
+                         physical id: 1
+                         bus info: nvme@1:1,1
+                         logical name: /dev/nvme1n1p1
+                         logical name: /home/river
+                         serial: 52eece09-219b-6642-b46b-125e6673d4a0
+                         capacity: 4199GiB
+                         configuration: mount.fstype=xfs mount.options=rw,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota state=mounted
+     *-pci:2
+          description: PCI bridge
+          product: Amazon.com, Inc.
+          vendor: Amazon.com, Inc.
+          physical id: 0
+          bus info: pci@0000:24:00.0
+          version: 00
+          width: 64 bits
+          clock: 33MHz
+          capabilities: pci msix pciexpress normal_decode bus_master cap_list
+          configuration: driver=pcieport
+          resources: irq:0 memory:c8400000-c84003ff memory:c8500000-c98fffff ioport:10a2000000(size=150994944)
+        *-pci
+             description: PCI bridge
+             product: Amazon.com, Inc.
+             vendor: Amazon.com, Inc.
+             physical id: 0
+             bus info: pci@0000:25:00.0
+             version: 00
+             width: 32 bits
+             clock: 33MHz
+             capabilities: pci msix pciexpress normal_decode bus_master cap_list
+             configuration: driver=pcieport
+             resources: irq:0 memory:c8500000-c85003ff memory:c8600000-c98fffff ioport:10a2000000(size=150994944)
+           *-pci:0
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0
+                bus info: pci@0000:26:00.0
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c8600000-c86003ff memory:c8700000-c88fffff ioport:10a2000000(size=16777216)
+              *-network
+                   description: Ethernet interface
+                   product: Elastic Network Adapter (ENA)
+                   vendor: Amazon.com, Inc.
+                   physical id: 0
+                   bus info: pci@0000:27:00.0
+                   logical name: enp39s0
+                   logical name: /dev/fb0
+                   version: 00
+                   serial: 0a:07:37:86:5c:53
+                   width: 64 bits
+                   clock: 33MHz
+                   capabilities: pciexpress msix bus_master cap_list ethernet physical fb
+                   configuration: broadcast=yes depth=32 driver=ena driverversion=6.8.0-1017-aws ip=172.31.41.193 latency=0 link=yes mode=800x600 multicast=yes visual=truecolor xres=800 yres=600
+                   resources: iomemory:100-ff irq:0 memory:c8700000-c8701fff memory:c8702000-c8703fff memory:10a2000000-10a20fffff
+           *-pci:1
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0.1
+                bus info: pci@0000:26:00.1
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c8600400-c86007ff memory:c8900000-c8afffff ioport:10a3000000(size=16777216)
+           *-pci:2
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0.2
+                bus info: pci@0000:26:00.2
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c8600800-c8600bff memory:c8b00000-c8cfffff ioport:10a4000000(size=16777216)
+           *-pci:3
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0.3
+                bus info: pci@0000:26:00.3
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c8600c00-c8600fff memory:c8d00000-c8efffff ioport:10a5000000(size=16777216)
+           *-pci:4
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0.4
+                bus info: pci@0000:26:00.4
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c8601000-c86013ff memory:c8f00000-c90fffff ioport:10a6000000(size=16777216)
+           *-pci:5
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0.5
+                bus info: pci@0000:26:00.5
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c8601400-c86017ff memory:c9100000-c92fffff ioport:10a7000000(size=16777216)
+           *-pci:6
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0.6
+                bus info: pci@0000:26:00.6
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c8601800-c8601bff memory:c9300000-c94fffff ioport:10a8000000(size=16777216)
+           *-pci:7
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 0.7
+                bus info: pci@0000:26:00.7
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c8601c00-c8601fff memory:c9500000-c96fffff ioport:10a9000000(size=16777216)
+           *-pci:8
+                description: PCI bridge
+                product: Amazon.com, Inc.
+                vendor: Amazon.com, Inc.
+                physical id: 1
+                bus info: pci@0000:26:01.0
+                version: 00
+                width: 32 bits
+                clock: 33MHz
+                capabilities: pci msix pciexpress normal_decode bus_master cap_list
+                configuration: driver=pcieport
+                resources: irq:0 memory:c8602000-c86023ff memory:c9700000-c98fffff ioport:10aa000000(size=16777216)
+  *-graphics
+       product: simpledrmdrmfb
+       physical id: 1
+       logical name: /dev/fb0
+       capabilities: fb
+       configuration: depth=32 resolution=800,600
+  *-input:0
+       product: Power Button
+       physical id: 2
+       logical name: input0
+       logical name: /dev/input/event0
+       capabilities: platform
+  *-input:1
+       product: Sleep Button
+       physical id: 3
+       logical name: input1
+       logical name: /dev/input/event1
+       capabilities: platform
+  *-input:2
+       product: AT Translated Set 2 keyboard
+       physical id: 4
+       logical name: input2
+       logical name: /dev/input/event2
+       logical name: input2::capslock
+       logical name: input2::numlock
+       logical name: input2::scrolllock
+       capabilities: i8042
+  *-input:3
+       product: ImPS/2 Generic Wheel Mouse
+       physical id: 5
+       logical name: input4
+       logical name: /dev/input/event3
+       logical name: /dev/input/mouse0
+       capabilities: i8042
