@@ -9,7 +9,7 @@ public class TestSSHUtils {
 
 	@Test
 	public void testConnectWithPassword() throws Exception {
-		SSHConnectionInfo connInfo = new SSHConnectionInfo("190.131.236.58", 20022, "summar", null, "D3l1noal0ch0");
+		SSHConnectionInfo connInfo = new SSHConnectionInfo("190.131.236.58", 20022, "summar", null, "");
 		byte[] result = SSHUtils.executeRemoteCommand(connInfo, "ls -la");
 		
 		System.out.println("Resultado:");
