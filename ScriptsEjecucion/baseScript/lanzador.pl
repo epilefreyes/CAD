@@ -3,9 +3,9 @@
 #         		Pontificia Universidad Javeriana
 #     Autor: Felipe Reyes Palacio, basado en script de J. Corredor
 #     Fecha: Octubre de 2024
-#     Materia: Computación de Alto Desempeño
-#     Tema: Taller de Evaluación de Rendimiento
-#     Fichero: Script automatización para ejecución masiva de prueba de rendimento
+#     Materia: Computacion de Alto Desempeño
+#     Tema: Taller de Evaluacion de Rendimiento
+#     Fichero: Script automatizacion para ejecucion masiva de prueba de rendimento
 #****************************************************************/
 
 use strict;
@@ -14,7 +14,6 @@ use File::Basename;
 use File::Path qw(make_path);
 use IPC::Open3;
 use Symbol 'gensym';
-use Text::CSV;
 
 # Ruta al directorio de trabajo
 my $project_dir = `pwd`;
@@ -30,7 +29,7 @@ unless (-d "salidas") {
 	make_path("salidas");
 }
 
-# Función para cambiar al directorio de trabajo y compilar el proyecto con CMake
+# Funcion para cambiar al directorio de trabajo y compilar el proyecto con CMake
 sub compile_cmake {
     chdir($project_dir) or die "No se puede cambiar al directorio: $!";
     
@@ -39,10 +38,10 @@ sub compile_cmake {
     # Ejecutar cmake y make
     system("cmake ..") == 0 or die "Error al ejecutar cmake: $!";
     system("make") == 0 or die "Error al ejecutar make: $!";
-    print "Proyecto compilado con éxito.\n";
+    print "Proyecto compilado con axito.\n";
 }
 
-# Función para ejecutar lshw
+# Funcion para ejecutar lshw
 sub run_lshw_system {
     
     my $hardware_file = "$project_dir/salidas/hardware.txt";
@@ -62,11 +61,11 @@ sub run_lshw_system {
 
 }
 
-# Función para ejecutar un programa con un número de threads y tamaño de matriz parametrizable
+# Funcion para ejecutar un programa con un numero de threads y tamaño de matriz parametrizable
 sub run_program {
     my ($program_name, $threads, $matrix_size) = @_;
     
-    # Asegúrate de estar en la carpeta build
+    # Asegurate de estar en la carpeta build
     chdir("$project_dir/build") or die "No se puede cambiar al directorio: $!";
     
     # Comando para ejecutar el programa
@@ -78,7 +77,7 @@ sub run_program {
     
     while (my $line = <CHLD_OUT>) {
         if ($line =~ /\b(\d+)\b/) {
-            $final_number = $1;  # Capturar el número si aparece
+            $final_number = $1;  # Capturar el numero si aparece
         }
     }
     
@@ -87,7 +86,7 @@ sub run_program {
     return $final_number;
 }
 
-# Función para escribir los resultados en un archivo CSV
+# Funcion para escribir los resultados en un archivo CSV
 sub write_to_csv {
     my ($program_name, $threads, $matrix_size, $result, $i) = @_;
 
@@ -96,26 +95,25 @@ sub write_to_csv {
     my $file_exists = -e $csv_file;
     
     # Escribir los resultados en el CSV
-    open my $file, '>>', $csv_file or die "No se puede abrir el archivo: $!";
-    my $csv = Text::CSV->new({ binary => 1, eol => "\n" });
+    open(FH, '>>', $csv_file) or die $!;
     
     # Si el archivo no existe, escribir el encabezado
     unless ($file_exists) {
-        $csv->print($file, ["Programa", "Threads", "Tamano", "Tiempo", "Iteracion"]);
+		print FH "Programa,Threads,Tamano,Tiempo,Iteracion\n";
     }
     
     # Escribir los datos
-    $csv->print($file, [$program_name, $threads, $matrix_size, $result, $i]);
-    close $file;
+	print FH $program_name, ",", $threads,",", $matrix_size,",", $result,",", $i,"\n";
+    close(FH);
 }
 
-# Función principal para ejecutar todo el proceso
+# Funcion principal para ejecutar todo el proceso
 sub main {
 
     # Compilar el proyecto
     compile_cmake();
     
-    # Definir los parámetros
+    # Definir los parametros
     my $csv_file = "$project_dir/salidas/resultados.csv";
 	unlink $csv_file;
 	
@@ -126,26 +124,26 @@ sub main {
     print "Generando listado de hardware y software...\n";
 	run_lshw_system();
 	
-    print "Número máximo de threads: $max_threads\n";
+    print "Numero maximo de threads: $max_threads\n";
     
     # Construir la lista de threads
     my @threads = map { 2**$_ } grep { 2**$_ <= $max_threads } (0..int(log($max_threads)/log(2)));
     
-    # Asegurar que 1 esté siempre en la lista
+    # Asegurar que 1 esta siempre en la lista
     unshift(@threads, 1) unless grep { $_ == 1 } @threads;
     
     my @matrix_size = (64, 128, 256, 512, 1024);
     my $iteraciones = 30;
 
     print "Lista de threads a utilizar: @threads\n";
-    print "Lista de tamaños de matriz: @matrix_size\n";
+    print "Lista tamanos de matriz: @matrix_size\n";
 
     # Ejecutar el programa y guardar el resultado
     for my $i (0..$iteraciones-1) {
 		my $current_date = `date  --rfc-3339=seconds`;
 		chomp($current_date);
 		
-        print $current_date, "\tIteración ", $i + 1, " de $iteraciones\n";
+        print $current_date, "\tIteracion ", $i + 1, " de $iteraciones\n";
         for my $j (@threads) {
             for my $x (@matrix_size) {
                 for my $z (@program_name) {
