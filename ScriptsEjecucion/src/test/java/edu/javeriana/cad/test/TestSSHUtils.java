@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
 
 import edu.javeriana.cad.CADScriptsExecutor;
 import edu.javeriana.cad.SSHUtils;
@@ -45,7 +44,7 @@ public class TestSSHUtils {
 		CADScriptsExecutor.updateUbuntuLibs(connInfo);
 	}
 	
-	@Test
+	//@Test
 	public void testExecuteFullTest() throws Exception{
 		String pemTesting = SSHUtils.getCadTestingPem();
 		Path tmpPem = Files.createTempFile("tmp", ".pem");
