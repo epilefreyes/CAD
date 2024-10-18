@@ -92,6 +92,8 @@ public class CADScriptsExecutor {
 			num++;
 		}
 		
+		Files.createDirectories(destinationFolder);
+		
 		try(ZipInputStream inStr = new ZipInputStream(Files.newInputStream(tmpZipFile, StandardOpenOption.READ))){
 			ZipEntry entry = inStr.getNextEntry();
 			while (entry!=null) {
