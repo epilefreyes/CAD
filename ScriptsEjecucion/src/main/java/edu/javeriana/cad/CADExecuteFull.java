@@ -63,7 +63,7 @@ public class CADExecuteFull {
 		
 	}
 
-	private static boolean isNotTerminated(AWSReservations statusInstance) {
+	public static boolean isNotTerminated(AWSReservations statusInstance) {
 		if (statusInstance == null || statusInstance.getReservations()==null || statusInstance.getReservations().length==0) {
 			return true;
 		}
