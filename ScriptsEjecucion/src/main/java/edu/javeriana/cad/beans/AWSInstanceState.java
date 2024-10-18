@@ -39,6 +39,11 @@ public class AWSInstanceState {
 		return (code == 16);
 	}
 
+	@JsonIgnore
+	public boolean isTerminated() {
+		return (code == 48);
+	}
+
 	@Override
 	public String toString() {
 		return "AWSInstanceState [code=" + code + ", name=" + name + "]";

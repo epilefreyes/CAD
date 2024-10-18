@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.jcraft.jsch.UserInfo;
 
 public class SSHConnectionInfo implements UserInfo{
+	private boolean debug=false;
 	private String host;
 	private int port=22;
 	private String username;
@@ -26,6 +27,14 @@ public class SSHConnectionInfo implements UserInfo{
 		this.password = password;
 	}
 
+	public void setDebug(boolean debug) {
+		this.debug = debug;
+	}
+	
+	public boolean isDebug() {
+		return debug;
+	}
+	
 	public int getPort() {
 		return port;
 	}
@@ -59,17 +68,19 @@ public class SSHConnectionInfo implements UserInfo{
 
 	@Override
 	public boolean promptPassphrase(String message) {
-		return StringUtils.isBlank(password);
+		return StringUtils.isNotBlank(passphrase);
 	}
 
 	@Override
 	public boolean promptYesNo(String message) {
-		return false;
+		return true;
 	}
 
 	@Override
 	public void showMessage(String message) {
-		
+		if (debug) {
+			System.out.println(message);
+		}
 	}
 
 }
