@@ -10,9 +10,9 @@ public class TestFullExecution {
 	//@Test
 	public void testFullExecution() throws Exception {
 		//m6g.2xlarge, ARM
-		Path outputPath = Paths.get("G:\\Mi unidad\\Personales\\felipe\\Maestrías Ingenieria de Sistemas - IA\\2024-03\\Computacion_Alto_Desempeño\\proyecto2\\salidas");
-		String instanceType = "m6g.2xlarge";
+		Path outputPath = Paths.get("G:\\cadSalidas");
+		String instanceType = "a1.metal";
 		boolean isx86 = false;
-		CADExecuteFull.executeFullTest(outputPath, instanceType, isx86);
+		CADExecuteFull.executeFullTest(outputPath, instanceType,"us-east-2a", isx86);
 	}
 }

@@ -16,11 +16,11 @@ import edu.javeriana.cad.beans.SSHConnectionInfo;
 
 public class CADExecuteFull {
 
-	public static void executeFullTest(Path outputPath, String instanceType, boolean isx86) throws Exception {
+	public static void executeFullTest(Path outputPath, String instanceType, String availabilityZone, boolean isx86) throws Exception {
 		LocalDateTime startTime = LocalDateTime.now();
 		
 		//1. Crea la máquina...
-		AWSInstanceElement instance = AWSRemoteUtils.createNewAWSMachine(instanceType, isx86);
+		AWSInstanceElement instance = AWSRemoteUtils.createNewAWSMachine(instanceType,availabilityZone, isx86);
 		String ipAddress = instance.getInstances()[0].getPublicIpAddress();
 		String idInstancia = instance.getInstances()[0].getInstanceId();
 		

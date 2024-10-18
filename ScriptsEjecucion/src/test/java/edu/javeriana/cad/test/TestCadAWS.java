@@ -14,7 +14,7 @@ public class TestCadAWS {
 	
 	//@Test
 	public void testCreateMachine() throws Exception{
-		AWSInstanceElement instance = AWSRemoteUtils.createNewAWSMachine("t2.micro", true);
+		AWSInstanceElement instance = AWSRemoteUtils.createNewAWSMachine("t2.micro", "us-east-2a", true);
 		
 		System.out.println("Instance created:" + instance.toString());
 	}

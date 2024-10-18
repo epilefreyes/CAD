@@ -23,11 +23,12 @@ public class MainExecuteFullTest {
 		}
 		
 		String instanceType = args[1];
+		String availabilityZone = args[2];
 
-		boolean isx86 = args[2].equalsIgnoreCase("true");
+		boolean isx86 = args[3].equalsIgnoreCase("true");
 		
 		try {
-			CADExecuteFull.executeFullTest(outputPath, instanceType, isx86);
+			CADExecuteFull.executeFullTest(outputPath, instanceType, availabilityZone, isx86);
 			System.out.println("Finalizado correctamente!!!!!");
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
@@ -36,7 +37,7 @@ public class MainExecuteFullTest {
 	}
 
 	private static void printHelp() {
-		System.err.println("Call it with output path, machine type and if isx86 (or not)");
+		System.err.println("Call it with output path, machine type, availability zone and if isx86 (true or false)");
 		
 	}
 

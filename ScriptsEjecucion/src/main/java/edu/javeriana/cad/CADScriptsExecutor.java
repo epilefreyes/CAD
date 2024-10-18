@@ -17,7 +17,7 @@ public class CADScriptsExecutor {
 	private static final String FINALIZED_FLAG = "-----FINALIZADO-----";
 
 	private static final String[] UPDATE_UBUNTU_LIBS_COMMANDS = new String[] {
-			"apt update",
+			"apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update",
 			"apt-get -y full-upgrade",
 			"apt install -y gcc make cmake libomp-dev zip unzip wget perl gzip tar build-essential",
 			"reboot"

@@ -23,7 +23,6 @@ public class AWSRemoteUtils {
 	private static final String AMI_ARM = "ami-01ebf7c0e446f85f9";
 	private static final String KEY_NAME = "cad-testing";
 	private static final String SECURITY_GROUPID = "sg-03e839dafcf838502";
-	private static final String SUBNET_ID = "subnet-1451ef58";
 	
 	
 	public static AWSReservations getInstanceStatus(String instanceId) throws Exception {
@@ -58,7 +57,7 @@ public class AWSRemoteUtils {
 		return Files.readString(file);
 	}
 	
-	public static AWSInstanceElement createNewAWSMachine(String instanceType, boolean isx86) throws Exception, DatabindException, IOException, InterruptedException {
+	public static AWSInstanceElement createNewAWSMachine(String instanceType, String availabilityZone, boolean isx86) throws Exception, DatabindException, IOException, InterruptedException {
 		AWSInstanceElement instance = 
 		executeCommandAWS(AWSInstanceElement.class,
 				AWS_PATH
@@ -74,10 +73,10 @@ public class AWSRemoteUtils {
 				,KEY_NAME
 				,"--security-group-ids"
 				,SECURITY_GROUPID
-				,"--subnet-id"
-				,SUBNET_ID
 				,"--profile"
 				,AWS_PROFILE
+				,"--placement"
+				,"AvailabilityZone=" + availabilityZone
 			);
 		
 		validateInstance(instance);
