@@ -1,5 +1,6 @@
 package edu.javeriana.cad.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -11,7 +12,13 @@ public class DatoHardware {
 	private Properties properties;
 	private List<DatoHardware> children;
 	private int profundidad;
-	private int espaciosOriginal;
+	
+	public DatoHardware(String titleName, int profundidad) {
+		this.titleName = titleName;
+		this.profundidad = profundidad;
+		this.properties = new Properties();
+		this.children = new ArrayList<>();
+	}
 	
 	public String getTitleName() {
 		return titleName;
@@ -36,12 +43,6 @@ public class DatoHardware {
 	}
 	public void setProfundidad(int profundidad) {
 		this.profundidad = profundidad;
-	}
-	public int getEspaciosOriginal() {
-		return espaciosOriginal;
-	}
-	public void setEspaciosOriginal(int espaciosOriginal) {
-		this.espaciosOriginal = espaciosOriginal;
 	}
 	@Override
 	public String toString() {
@@ -69,6 +70,57 @@ public class DatoHardware {
 	private String espacios() {
 		int espacios = this.profundidad*4;
 		return StringUtils.leftPad("", espacios);
+	}
+
+	public String evaluarRutaExistente(String... rutas) {
+		for(String ruta : rutas) {
+			if (isRutaExiste(ruta)) {
+				return ruta;
+			}
+		}
+		return null;
+	}
+	
+	public boolean isRutaExiste(String rutaBusqueda) {
+		int posicSlash = rutaBusqueda.indexOf("/");
+		if (posicSlash<=0) {
+			return this.properties.containsKey(rutaBusqueda);
+		}
+		
+		DatoHardware hijo = getHijoByName(rutaBusqueda.substring(0,posicSlash));
+		if (hijo==null) {
+			return false;
+		}
+		return hijo.isRutaExiste(rutaBusqueda.substring(posicSlash+1));
+		
+		
+	}
+	
+	public String getValorHijo(String rutaBusqueda, String valorDefecto) {
+		if (StringUtils.isBlank(rutaBusqueda)) {
+			return valorDefecto;
+		}
+		int posicSlash = rutaBusqueda.indexOf("/");
+		if (posicSlash<=0) {
+			return this.properties.getProperty(rutaBusqueda,valorDefecto);
+		} else {
+			DatoHardware hijo = getHijoByName(rutaBusqueda.substring(0,posicSlash));
+			if (hijo==null) {
+				return valorDefecto;
+			}
+			return hijo.getValorHijo(rutaBusqueda.substring(posicSlash+1), valorDefecto);
+		}
+	}
+
+	public DatoHardware getHijoByName(String nombreHijo) {
+		if (children != null) {
+			for(DatoHardware hijo : children) {
+				if (hijo.getTitleName().equalsIgnoreCase(nombreHijo)) {
+					return hijo;
+				}
+			}
+		}
+		return null;
 	}
 	
 }
