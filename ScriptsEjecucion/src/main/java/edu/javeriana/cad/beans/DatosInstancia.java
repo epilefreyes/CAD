@@ -18,10 +18,10 @@ public class DatosInstancia {
 	private long tiempoEjecucionSeg;
 	private String sistemaOperativo;
 	private int tamanoPalabra;
-	private long cache1Bytes;
-	private long cache2Bytes;
-	private long cache3Bytes;
-	private long cache4Bytes;
+	private long cache1KB;
+	private long cache2KB;
+	private long cache3KB;
+	private long cache4KB;
 	
 	public DatosInstancia() {
 	}
@@ -41,10 +41,10 @@ public class DatosInstancia {
 		this.tiempoEjecucionSeg = Integer.parseInt(getDato(11,datosLinea,"0"));
 		this.sistemaOperativo = getDato(12,datosLinea);
 		this.tamanoPalabra = Integer.parseInt(getDato(13,datosLinea,"0"));
-		this.cache1Bytes = Long.parseLong(getDato(14,datosLinea,"0"));
-		this.cache2Bytes = Long.parseLong(getDato(15,datosLinea,"0"));
-		this.cache3Bytes = Long.parseLong(getDato(16,datosLinea,"0"));
-		this.cache4Bytes = Long.parseLong(getDato(17,datosLinea,"0"));
+		this.cache1KB = Long.parseLong(getDato(14,datosLinea,"0"));
+		this.cache2KB = Long.parseLong(getDato(15,datosLinea,"0"));
+		this.cache3KB = Long.parseLong(getDato(16,datosLinea,"0"));
+		this.cache4KB = Long.parseLong(getDato(17,datosLinea,"0"));
 		
 	}
 
@@ -152,29 +152,29 @@ public class DatosInstancia {
 	public void setTamanoPalabra(int tamanoPalabra) {
 		this.tamanoPalabra = tamanoPalabra;
 	}
-	public long getCache1Bytes() {
-		return cache1Bytes;
+	public long getCache1KB() {
+		return cache1KB;
 	}
-	public void setCache1Bytes(long cache1Bytes) {
-		this.cache1Bytes = cache1Bytes;
+	public void setCache1KB(long cache1kb) {
+		cache1KB = cache1kb;
 	}
-	public long getCache2Bytes() {
-		return cache2Bytes;
+	public long getCache2KB() {
+		return cache2KB;
 	}
-	public void setCache2Bytes(long cache2Bytes) {
-		this.cache2Bytes = cache2Bytes;
+	public void setCache2KB(long cache2kb) {
+		cache2KB = cache2kb;
 	}
-	public long getCache3Bytes() {
-		return cache3Bytes;
+	public long getCache3KB() {
+		return cache3KB;
 	}
-	public void setCache3Bytes(long cache3Bytes) {
-		this.cache3Bytes = cache3Bytes;
+	public void setCache3KB(long cache3kb) {
+		cache3KB = cache3kb;
 	}
-	public long getCache4Bytes() {
-		return cache4Bytes;
+	public long getCache4KB() {
+		return cache4KB;
 	}
-	public void setCache4Bytes(long cache4Bytes) {
-		this.cache4Bytes = cache4Bytes;
+	public void setCache4KB(long cache4kb) {
+		cache4KB = cache4kb;
 	}
 
 	@Override
@@ -189,9 +189,45 @@ public class DatosInstancia {
 				+ (zonaDisponibilidad != null ? "zonaDisponibilidad=" + zonaDisponibilidad + ", " : "")
 				+ "tiempoEjecucionSeg=" + tiempoEjecucionSeg + ", "
 				+ (sistemaOperativo != null ? "sistemaOperativo=" + sistemaOperativo + ", " : "") + "tamanoPalabra="
-				+ tamanoPalabra + ", cache1Bytes=" + cache1Bytes + ", cache2Bytes=" + cache2Bytes + ", cache3Bytes="
-				+ cache3Bytes + ", cache4Bytes=" + cache4Bytes + "]";
+				+ tamanoPalabra + ", cache1KB=" + cache1KB + ", cache2KB=" + cache2KB + ", cache3KB=" + cache3KB
+				+ ", cache4KB=" + cache4KB + "]";
 	}
 
+	public String toCSVFileLine() {
+		//"Instancia,Arquitectura,Fabricante,CPUs,Memoria,Velocidad_memoria,Hypervisor,Procesador,Velocidad_Procesador,USD_Hour,Zona_Disponibilidad,Tiempo_ejecucion,Sistema_Operativo,Tamano_Palabra,CACHE1,CACHE2,CACHE3,CACHE4"
+		StringBuffer str = new StringBuffer();
+		str.append(this.instancia);
+		str.append("," + obj2String(this.arquitectura));
+		str.append("," + obj2String(this.fabricante));
+		str.append("," + this.CPUs);
+		str.append("," + this.memoria);
+		str.append("," + this.velocidadMemoriaMhz);
+		str.append("," + obj2String(this.hypervisor));
+		str.append("," + obj2String(this.procesador));
+		str.append("," + this.velocidadProcesadorMhz);
+		str.append("," + this.costoHoraUSD);
+		str.append("," + obj2String(this.zonaDisponibilidad));
+		str.append("," + this.tiempoEjecucionSeg);
+		str.append("," + obj2String(this.sistemaOperativo));
+		str.append("," + this.tamanoPalabra);
+		str.append("," + this.cache1KB);
+		str.append("," + this.cache2KB);
+		str.append("," + this.cache3KB);
+		str.append("," + this.cache4KB);
+		return str.toString();
+	}
+
+	private String obj2String(String obj) {
+		if (obj == null) {
+			return "";
+		}
+		String aux = obj.replace(",", " ").replace("\t", " ").replace("\n", " ").replace("\r", "").trim().replace("\"", "\"\"");
+		while (aux.contains("  ")) {
+			aux = aux.replace("  ", " ");
+		}
+		
+		return String.format("\"%s\"", aux);
+	}
+	
 	
 }

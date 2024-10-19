@@ -10,9 +10,9 @@ import edu.javeriana.cad.beans.SSHConnectionInfo;
 
 public class TestOtherMachines {
 
-	@Test
+	//@Test
 	public void ejecutarPruebas() throws Exception {
-		SSHConnectionInfo connInfo = new SSHConnectionInfo("89.117.23.46", "root", null, "D3l1noal0ch0");
+		SSHConnectionInfo connInfo = new SSHConnectionInfo("89.117.23.46", "root", null, "");
 		CADScriptsExecutor.waitForConnection(connInfo, Duration.ofMinutes(5));
 		CADScriptsExecutor.executeTestFull(Paths.get("C:\\testCAD\\salidas"), "contaboInfodigg", connInfo);
 		
