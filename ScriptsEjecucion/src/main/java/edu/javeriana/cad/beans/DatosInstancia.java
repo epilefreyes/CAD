@@ -2,6 +2,11 @@ package edu.javeriana.cad.beans;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * Datos recopilados de cada instancia, que se recopilan y generan en el archivo de salida
+ * @author FelipeReyesPalacio
+ *
+ */
 public class DatosInstancia {
 
 	private String instancia;

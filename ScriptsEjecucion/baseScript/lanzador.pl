@@ -46,12 +46,6 @@ sub run_lshw_system {
     
     my $hardware_file = "$project_dir/salidas/hardware.txt";
     my $os_output = "$project_dir/salidas";
-    # Comando para ejecutar el programa
-    my $command = "lshw >$hardware_file";
-    
-    my $stderr = gensym;
-    my $pid = open3(undef, \*CHLD_OUT, $stderr, $command);
-    waitpid($pid, 0);  # Esperar a que el proceso termine completamente
 	
     my $command = "cp /etc/os-release $os_output";
     

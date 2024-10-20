@@ -19,45 +19,25 @@ import com.jcraft.jsch.Session;
 
 import edu.javeriana.cad.beans.SSHConnectionInfo;
 
+/**
+ * Clase con los comandos SSH de automatización utilizados
+ * @author FelipeReyesPalacio
+ *
+ */
 public class SSHUtils {
 
+	/**
+	 * Parámetros globales para la clase JSCH, utilizada en la ejecución de comandos SSH
+	 */
 	static {
 		JSch.setConfig("StrictHostKeyChecking", "no");
-//		JSch.setLogger(new Logger() {
-//
-//			@Override
-//			public boolean isEnabled(int level) {
-//				return true;
-//			}
-//
-//			@Override
-//			public void log(int level, String message) {
-//				String lvlStr = getLevel(level);
-//				System.out.println(String.format("%s [%s]\t%s",now(),lvlStr,message));
-//				
-//			}
-//
-//			private String now() {
-//				DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-//				return fmt.format(new Date());
-//			}
-//
-//			private String getLevel(int level) {
-//				if (level == Logger.DEBUG) {
-//					return "DEBUG";
-//				} else if (level == Logger.ERROR) {
-//					return "ERROR";
-//				} else if (level == Logger.FATAL) {
-//					return "FATAL";
-//				} else if (level == Logger.INFO) {
-//					return "INFO";
-//				}
-//				return "WARN";
-//			}
-//			
-//		});
 	}
 	
+	/**
+	 * Función que intenta conectarse vía SSH y ejecutar un comando simple (ls) sobre una máquina, para determinar si está encendida o no
+	 * @param connectionInfo Información de conexión para la máquina vía SSH
+	 * @return True si el comando pudo ejecutarse, false si no
+	 */
 	public static boolean isRunningMachine(SSHConnectionInfo connectionInfo) {
 		try {
 			executeRemoteCommand(connectionInfo, "ls", false,false);
@@ -66,7 +46,16 @@ public class SSHUtils {
 			return false;
 		}
 	}
-	
+
+	/**
+	 * Función que ejecuta un comando SSH remoto y retorna la información generada por el comando
+	 * @param connectionInfo Información de conexión para la máquina vía SSH
+	 * @param commandToExecute Comando a ejecutar
+	 * @param executeWithSudo True si se desea ejecutar el comando con SUDO, false si no (asume que el usuario de conexión puede hacer SUDO)
+	 * @param writeOutputStdOut True si se desea depurar el comando, mostrando por pantalla la salida del mismo mientras se ejecuta.
+	 * @return Salida del comando ejecutado
+	 * @throws Exception SI se producen errores durante la ejecución del comando, lanza esta excepción
+	 */
 	public static byte[] executeRemoteCommand(SSHConnectionInfo connectionInfo, String commandToExecute, boolean executeWithSudo, boolean writeOutputStdOut)
 			throws Exception {
 		byte[] result = null;
@@ -120,6 +109,12 @@ public class SSHUtils {
 		return result;
 	}
 
+	/**
+	 * Función que copia una entrada en una salida, imprimiendo por pantalla cada línea de texto de entrada 
+	 * @param inStr Stream de entrada
+	 * @param out Stream de salida
+	 * @throws IOException SI se producen errores durante la ejecución del comando, lanza esta excepción
+	 */
 	private static void copyWrittingOutput(InputStream inStr, OutputStream out) throws IOException{
 		int byteRead = inStr.read();
 		try(ByteArrayOutputStream line = new ByteArrayOutputStream()) {
@@ -143,6 +138,12 @@ public class SSHUtils {
 		}
 	}
 
+	/**
+	 * Función interna que produce la sesión SSH de conexión, a partir de los datos de conexión
+	 * @param connectionInfo Información de conexión para la máquina vía SSH
+	 * @return Sesión SSH creada y conectada
+	 * @throws Exception Si se producen errores durante la ejecución del comando, lanza esta excepción
+	 */
 	private static Session generateSession(SSHConnectionInfo connectionInfo) throws Exception {
 		JSch jsch = new JSch();
 		
@@ -157,6 +158,13 @@ public class SSHUtils {
 		return session;
 	}
 
+	/**
+	 * Transfiere un archivo usando SCP al equipo local.  Utliza una copia del algoritmo de ejemplo de la librería JSCH
+	 * @param connectionInfo Información de conexión para la máquina vía SSH
+	 * @param fileToGet Ruta del archivo remoto a traer
+	 * @return Retorna la ruta (temporal) donde se copió el archivo remoto.
+	 * @throws Exception Si se producen errores durante la ejecución del comando, lanza esta excepción
+	 */
 	public static Path scpRemoteFile(SSHConnectionInfo connectionInfo, String fileToGet) throws Exception {
 		String ext = FilenameUtils.getExtension(fileToGet);
 		Path tmpOutputFile = Files.createTempFile("tmp", "." + ext);
@@ -274,6 +282,11 @@ public class SSHUtils {
 		return b;
 	}
 
+	/**
+	 * Trae el archivo PEM (guardado en recursos locales) utilizado para acceder vía clave pública a una máquina de prueba.
+	 * @return Contenido del PEM
+	 * @throws IOException SI se producen errores de lectura, lanza esta excepción
+	 */
 	public static String getCadTestingPem() throws IOException {
 		try(ByteArrayOutputStream out = new ByteArrayOutputStream()){
 			try(InputStream inStr = SSHUtils.class.getResourceAsStream("/cad-testing.pem")){

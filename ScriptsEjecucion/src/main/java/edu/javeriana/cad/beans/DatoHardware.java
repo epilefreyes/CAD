@@ -6,6 +6,11 @@ import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * Clase (tipo árbol) que almacena la salida del comando LSHW
+ * @author FelipeReyesPalacio
+ *
+ */
 public class DatoHardware {
 
 	private String titleName;

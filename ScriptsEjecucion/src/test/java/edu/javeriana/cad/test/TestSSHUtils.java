@@ -11,6 +11,11 @@ import edu.javeriana.cad.CADScriptsExecutor;
 import edu.javeriana.cad.SSHUtils;
 import edu.javeriana.cad.beans.SSHConnectionInfo;
 
+/**
+ * Pruebas de ejecución de las funciones SSH 
+ * @author FelipeReyesPalacio
+ *
+ */
 public class TestSSHUtils {
 
 	private SSHConnectionInfo generateConnectionInfo() {

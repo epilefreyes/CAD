@@ -3,11 +3,14 @@ package edu.javeriana.cad.test;
 import java.nio.file.Paths;
 import java.time.Duration;
 
-import org.junit.Test;
-
 import edu.javeriana.cad.CADScriptsExecutor;
 import edu.javeriana.cad.beans.SSHConnectionInfo;
 
+/**
+ * Función para automatizar la ejecucón de pruebas completas sobre equipos remotos (no AWS)
+ * @author FelipeReyesPalacio
+ *
+ */
 public class TestOtherMachines {
 
 	//@Test

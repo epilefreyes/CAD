@@ -8,7 +8,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
 
 import edu.javeriana.cad.AWSRemoteUtils;
 import edu.javeriana.cad.CADExecuteFull;
@@ -19,6 +18,12 @@ import edu.javeriana.cad.beans.AWSReservations;
 import edu.javeriana.cad.beans.AWSTerminatingInstances;
 import edu.javeriana.cad.beans.SSHConnectionInfo;
 
+/**
+ * Clase utilizada para probar y validar la ejecución del comando LSCPU, cuando se hizo necesario para completar información
+ * incompleta del comando LSHW
+ * @author FelipeReyesPalacio
+ *
+ */
 public class TestEvaluateLSCPU {
 
 	//@Test

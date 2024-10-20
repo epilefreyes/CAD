@@ -18,9 +18,19 @@ import org.apache.commons.lang3.StringUtils;
 import edu.javeriana.cad.beans.DatoHardware;
 import edu.javeriana.cad.beans.DatosInstancia;
 
+/**
+ * Clase con el proceso completo de unificación de datos obtenidos de todas las máquinas ejecutadas
+ * @author FelipeReyesPalacio
+ *
+ */
 public class UnifierUtils {
 
-	public static void main(String[] args) throws IOException {
+	/**
+	 * Algoritmo primario de ejecución (main)
+	 * @param args Argumentos.  No utilizados
+	 * @throws Exception Si se producen errores durante la recopilación, lanza este error
+	 */
+	public static void main(String[] args) throws Exception {
 		Path rutaBase = Paths.get("G:\\Mi unidad\\Personales\\felipe\\Maestrías Ingenieria de Sistemas - IA\\2024-03\\Computacion_Alto_Desempeño\\proyecto2");
 		Path inputPath = rutaBase.resolve("salidas");
 		Path datosBaseInstanciasPath = rutaBase.resolve("datosInstancias.txt");
@@ -95,6 +105,11 @@ public class UnifierUtils {
 		System.out.println("Finalizado!!!");
 	}
 
+	/**
+	 * Función privada que extrae la velocidad de un procesador de su nombre descriptivo
+	 * @param procesador Nombre del procesador
+	 * @return Velocidad, si aplica (0 si no)
+	 */
 	private static int getVelocidadNombreProcesador(String procesador) {
 		if (procesador.contains("@")) {
 			String aux = procesador.substring(procesador.lastIndexOf("@")+1);
@@ -103,6 +118,12 @@ public class UnifierUtils {
 		return 0;
 	}
 
+	/**
+	 * Función que extrae el tamaño de la caché, En Kb, si está presente en el archivo de salida "lscpu"
+	 * @param propsLSCPU Propiedades tomadas del archivo lscpu
+	 * @param numCache Número de la caché a buscar (1,2,3 o 4)
+	 * @return Tamaño del caché, en Kb.
+	 */
 	private static long getTamanoCachelscpu(Properties propsLSCPU, int numCache) {
 		String propNameBase = "L" + numCache + " cache";
 		if (propsLSCPU.containsKey(propNameBase)) {
@@ -119,6 +140,11 @@ public class UnifierUtils {
 		return 0;
 	}
 
+	/**
+	 * Retorna el tamaño de la caché en un texto dado
+	 * @param propValue Valor del texto de la caché
+	 * @return Tamaño de la caché en Kb
+	 */
 	private static long getTamanoCachePropertyLSCPU(String propValue) {
 		if (StringUtils.isNotBlank(propValue)) {
 			//512 KiB (16 instances)
@@ -137,6 +163,13 @@ public class UnifierUtils {
 		return 0;
 	}
 
+	/**
+	 * Función que busca el mejor nombre (el más largo) del procesador, entre las propiedades del comando lshw y las del comando lscpu
+	 * @param datos Datos iniciales de la instancia 
+	 * @param datosHW Datos del comando lshw
+	 * @param propsLSCPU Datos del comando lscpu
+	 * @return Mejor nombre del procesador encontrado
+	 */
 	private static String getProcesador(DatosInstancia datos, DatoHardware datosHW, Properties propsLSCPU) {
 		String modelName = propsLSCPU.getProperty("Model name", "");
 		String modelBiosName = propsLSCPU.getProperty("BIOS Model name", "");
@@ -152,10 +185,22 @@ public class UnifierUtils {
 		return datosHW.getValorHijo(datosHW.evaluarRutaExistente("core/cpu:0/product","core/cpu/product"),datos.getProcesador());
 	}
 
+	/**
+	 * Función que retorna la cantidad de CPUs (cores) disponibles, segùn el comando LSCPU
+	 * @param propsLSCPU Datos del comando LSCPU
+	 * @return Número de CPUs, si aplica.
+	 */
 	private static int getCpusLSCPU(Properties propsLSCPU) {
 		return Integer.parseInt(propsLSCPU.getProperty("CPU(s)", "0"));
 	}
 
+	/**
+	 * Función que toma la salida del archivo LSCPU (si existe) y lo convierte en un objeto de propiedades (campo=valor)
+	 * @param lscpuPath Ruta general donde se almacenaron las salidas de los archivos LSCPU
+	 * @param instancia Instancia a validar
+	 * @return Propiedades extraídas del archivo LSCPU, u objeto vacìo (no nulo) si no existe 
+	 * @throws IOException SI se producen errores de lectura, lanza esta excepción
+	 */
 	private static Properties getPropertiesLSCPU(Path lscpuPath, String instancia) throws IOException {
 		Path lscpuFile = lscpuPath.resolve(instancia + ".txt");
 		Properties props = new Properties();
@@ -174,16 +219,27 @@ public class UnifierUtils {
 		return props;
 	}
 
-	private static long getTamanoCache(DatoHardware datosHW, int i) {
+	/**
+	 * Función que genera el tamaño de la caché, de acuerdo a los datos de hardware provistos por el comando LSHW
+	 * @param datosHW Datos del archivo LSHW 
+	 * @param numCache Número de la caché a buscar (1,2,3 o 4)
+	 * @return
+	 */
+	private static long getTamanoCache(DatoHardware datosHW, int numCache) {
 		String ruta = "";
-		if (i==1) {
+		if (numCache==1) {
 			ruta = datosHW.evaluarRutaExistente("core/cache/size","core/cache:0/size","core/cpu/cache/size","core/cpu:0/cache:0/size","core/cpu/cache:0/size");
 		} else {
-			ruta = datosHW.evaluarRutaExistente(String.format("core/cpu/cache:%d/size",i-1),String.format("core/cache:%d/size",i-1));
+			ruta = datosHW.evaluarRutaExistente(String.format("core/cpu/cache:%d/size",numCache-1),String.format("core/cache:%d/size",numCache-1));
 		}
 		return getValorKB(datosHW.getValorHijo(ruta, "0"));
 	}
 
+	/**
+	 * Funciòn que busca el mejor dato de tamaño de palabra (32 o 64 bits) en los datos de hardware
+	 * @param datosHW Datos del archivo LSHW 
+	 * @return Tamaño de palabra encontrado (32 o 64) o 0 si no fue encontrado.
+	 */
 	private static int getTamanoPalabra(DatoHardware datosHW) {
 		String aux = getOnlyDigits(
 				datosHW.getValorHijo(
@@ -192,7 +248,14 @@ public class UnifierUtils {
 		return Integer.parseInt(aux);
 	}
 
-	private static long traerTiempoSegunLog(String instancia, Path logsSalidaPath) throws NumberFormatException, IOException {
+	/**
+	 * Trae el tiempo de ejecución según el log de ejecución de comandos
+	 * @param instancia Instancia a validar
+	 * @param logsSalidaPath Ruta de salida de los logs de ejecución
+	 * @return Tiempo de ejecución (si aplica) 
+	 * @throws Exception Si ocurren errores de lectura o interpretación, lanza este error
+	 */
+	private static long traerTiempoSegunLog(String instancia, Path logsSalidaPath) throws Exception {
 		//Total execution time for machine (seconds):1090
 		Path archivoLog = logsSalidaPath.resolve(String.format("%s.log", instancia));
 		long totalTimeFound = 0;
@@ -209,19 +272,24 @@ public class UnifierUtils {
 		return totalTimeFound;
 	}
 
-	private static int getValorMhz(String valorHijo) {
-		if (StringUtils.isBlank(valorHijo)) {
+	/**
+	 * Retorna el valor en Mhz de una frecuencia dada
+	 * @param texto Valor del parámetro con una frecuencia en Khz, Mhz o Khz
+	 * @return Velocidad en Mhz, o 0 si no aplica.
+	 */
+	private static int getValorMhz(String texto) {
+		if (StringUtils.isBlank(texto)) {
 			return 0;
 		}
-		valorHijo = valorHijo.toUpperCase().trim();
+		texto = texto.toUpperCase().trim();
 		double multiplicador = 1;
-		if (valorHijo.contains("KHZ")) {
+		if (texto.contains("KHZ")) {
 			multiplicador = 0.1f;
-		} else if (valorHijo.contains("GHZ")) {
+		} else if (texto.contains("GHZ")) {
 			multiplicador = 1000.0f;
 		}
 		
-		char[] chars = valorHijo.toCharArray();
+		char[] chars = texto.toCharArray();
 		int i = 0;
 		StringBuffer str = new StringBuffer();
 		while (i < chars.length &&  isDigitOrComma(chars[i])) {
@@ -237,22 +305,42 @@ public class UnifierUtils {
 		}
 	}
 
+	/**
+	 * Función que determina si un carácter es un dígito, coma o punto
+	 * @param c Carácter a validar
+	 * @return True si un carácter es un dígito, coma o punto
+	 */
 	private static boolean isDigitOrComma(char c) {
 		return (c >= '0' && c <= '9') || c == ',' || c=='.';
 	}
 
+	/**
+	 * Retorna un texto dado con una medida de almacenamiento, en Megabytes
+	 * @param valor Texto a validar
+	 * @return Valor en Megabytes
+	 */
 	private static int getValorMB(String valor) {
 		double valorBytes = (double)getValorBytes(valor);
 		double valorMB = valorBytes / (1024.0f * 1024.0f);
 		return (int)Math.round(valorMB);
 	}
 
+	/**
+	 * Retorna un texto dado con una medida de almacenamiento, en Kilobytes
+	 * @param valor Texto a validar
+	 * @return Valor en Kilobytes
+	 */
 	private static int getValorKB(String valor) {
 		double valorBytes = (double)getValorBytes(valor);
 		double valorMB = valorBytes / 1024.0f;
 		return (int)Math.round(valorMB);
 	}
 
+	/**
+	 * Toma un texto con una medida de almacenamiento y lo retorna en bytes
+	 * @param valor Valor a analizar
+	 * @return Valor en Bytes encontrado.
+	 */
 	private static long getValorBytes(String valor) {
 		valor = valor.toUpperCase().trim();
 		long multiplicador = 1;
@@ -280,6 +368,11 @@ public class UnifierUtils {
 		return valorBase * multiplicador;
 	}
 
+	/**
+	 * Función que toma un texto y retorna únicamente aquellos caracteres que sean dígitos numéricos
+	 * @param cad Cadena de texto a analizar
+	 * @return Caracteres únicamente de dígitos
+	 */
 	public static String getOnlyDigits(String cad) {
 		if (StringUtils.isBlank(cad)) {
 			return "";
@@ -293,6 +386,11 @@ public class UnifierUtils {
 		return str.toString();
 	}
 	
+	/**
+	 * Función que cuenta cuántas CPU existen en el dato de Hardware "core"
+	 * @param core Dato de hardware "core"
+	 * @return Número de CPUs encontradas.
+	 */
 	private static int contarCPUs(DatoHardware core) {
 		if (core == null || core.getChildren() == null) {
 			return 0;
@@ -306,22 +404,16 @@ public class UnifierUtils {
 		return conteo;
 	}
 
+	/**
+	 * Función que lee un archivo de salida del comando LSHW y lo retorna en forma de árbol
+	 * @param archivoHW Ruta del archivo de salida del comando LSHW
+	 * @return Arbol de datos del archivo
+	 * @throws IOException Si se producen errores de lectura del archivo, lanza esta excepción.
+	 */
 	private static DatoHardware leerDatosHardware(Path archivoHW) throws IOException {
-		List<String> datosArchivo = Files.readAllLines(archivoHW);
-//		DatoHardware padre = new DatoHardware();
-//		padre.setProfundidad(0);
-//		padre.setTitleName(datosArchivo.remove(0));
-//		padre.setProperties(new Properties());
-//		while (!siguienteEsTituloHw(datosArchivo)) {
-//			setPropiedadHW(datosArchivo, padre);
-//		}
-//		int espaciosHijo = datosArchivo.get(0).indexOf("*-");
-//		
-		return crearArbol(datosArchivo);
-	}
+		List<String> lineas = Files.readAllLines(archivoHW);
 
-	private static DatoHardware crearArbol(List<String> lineas) {
-        Stack<DatoHardware> pila = new Stack<>();
+		Stack<DatoHardware> pila = new Stack<>();
         DatoHardware raiz = null;
         DatoHardware ultimoNodo = null;
         
@@ -364,6 +456,12 @@ public class UnifierUtils {
         return raiz;
     }
 	
+	/**
+	 * Función para actualizar de forma recursiva la profundidad de todos los nodos del árbol (originalmente con valores en espacios) 
+	 * con valores simples 0,1,2... 
+	 * @param nodo Nodo a actualizar
+	 * @param profundidad Profundidad actual a establecer.
+	 */
 	private static void updateProfundidad(DatoHardware nodo, int profundidad) {
 		nodo.setProfundidad(profundidad);
 		
@@ -374,6 +472,11 @@ public class UnifierUtils {
 		}
 	}
 
+	/**
+	 * Función que lee una línea de propiedad de un nodo de datos de hardware y lo añade como propiedad campo=valor
+	 * @param padre Elemento padre donde colocar la propiedad
+	 * @param linea Linea de datos
+	 */
 	private static void setPropiedadHW(DatoHardware padre,String linea) {
 		if (StringUtils.isNotBlank(linea)) {
 			int dosPuntos = linea.indexOf(":");
@@ -387,10 +490,23 @@ public class UnifierUtils {
 		}
 	}
 
+	/**
+	 * Función de ayuda que determina si una línea del archivo de salida del comando LSHW es un título o no (inicia con *-)
+	 * @param linea Linea a evaluar
+	 * @return True si es un título, false si no
+	 */
 	private static boolean esLineaTitulo(String linea) {
 		return !linea.startsWith(" ") || linea.trim().startsWith("*-");
 	}
 
+	/**
+	 * Función que copia los resultados parciales obtenidos por una instancia, al archivo final compilado
+	 * @param instancia Instancia a analizar
+	 * @param origenResultados Origen de los resultados
+	 * @param archivoDatos Archivo de datos de salida
+	 * @return Suma de los tiempos de todos los resultados, como un posible tiempo de ejecución a utilizar
+	 * @throws IOException Si se producen errores en la lectura de los archivos o escritura del archivo de salida, lanza esta excepción
+	 */
 	private static long copiarResultados(String instancia, Path origenResultados, Path archivoDatos) throws IOException {
 		if (!Files.exists(origenResultados)) {
 			throw new IOException("El archivo de resultados " + origenResultados.toAbsolutePath().toString() + " no existe!");

@@ -5,6 +5,11 @@ import java.nio.file.Paths;
 
 import edu.javeriana.cad.CADExecuteFull;
 
+/**
+ * Función para ejecutar la prueba de ejecución de la prueba completa sobre un equipo específico
+ * @author FelipeReyesPalacio
+ *
+ */
 public class TestFullExecution {
 
 	//@Test

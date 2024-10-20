@@ -4,6 +4,11 @@ import edu.javeriana.cad.AWSRemoteUtils;
 import edu.javeriana.cad.beans.AWSInstanceElement;
 import edu.javeriana.cad.beans.AWSReservations;
 
+/**
+ * Pruebas iniciales de creación y validación de estado de instancias AWS
+ * @author FelipeReyesPalacio
+ *
+ */
 public class TestCadAWS {
 
 //	@Test

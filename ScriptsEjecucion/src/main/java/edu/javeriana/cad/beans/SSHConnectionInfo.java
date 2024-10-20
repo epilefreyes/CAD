@@ -4,6 +4,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.jcraft.jsch.UserInfo;
 
+/**
+ * Información requerida para conexión vía SSH en una máquina remota.  
+ * Implementa además "userInfo", requerido por la librería JSCH 
+ * @author FelipeReyesPalacio
+ *
+ */
 public class SSHConnectionInfo implements UserInfo{
 	private boolean debug=false;
 	private String host;

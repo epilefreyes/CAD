@@ -14,8 +14,22 @@ import edu.javeriana.cad.beans.AWSReservations;
 import edu.javeriana.cad.beans.AWSTerminatingInstances;
 import edu.javeriana.cad.beans.SSHConnectionInfo;
 
+/**
+ * Clase de ejecución de scripts completo de creación y ejecución de pruebas sobre una máquina dada
+ * @author FelipeReyesPalacio
+ *
+ */
 public class CADExecuteFull {
 
+	/**
+	 * Función que permite ejecutar una prueba completa sobre un tipo de instancia AWS dada, creando la máquina, 
+	 * ejecutando las pruebas, trayendo la información de la prueba y destruyendo la instancia (fuera o no exitosa la prueba)
+	 * @param outputPath Ruta de salida de los resultados recopilados
+	 * @param instanceType Tipo de instancia
+	 * @param availabilityZone Zona de disponibilidad de instancia
+	 * @param isx86 True si el tipo de instancia es X86, false si es ARM
+	 * @throws Exception SI se producen errores de ejecución, lanza esta excepción con el detalle del problema.
+	 */
 	public static void executeFullTest(Path outputPath, String instanceType, String availabilityZone, boolean isx86) throws Exception {
 		LocalDateTime startTime = LocalDateTime.now();
 		
@@ -63,6 +77,12 @@ public class CADExecuteFull {
 		
 	}
 
+	/**
+	 * Función de validación de destrucción de una instancia.  Utilizada para esperar hasta que una instancia esté destruida y calcular adecuadamente su tiempo
+	 * de ejecución
+	 * @param statusInstance Datos de la instancia a validar
+	 * @return True si la instancia está en estado terminada, false si no.
+	 */
 	public static boolean isNotTerminated(AWSReservations statusInstance) {
 		if (statusInstance == null || statusInstance.getReservations()==null || statusInstance.getReservations().length==0) {
 			return true;

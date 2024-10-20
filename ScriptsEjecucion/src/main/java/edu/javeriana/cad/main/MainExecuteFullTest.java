@@ -6,6 +6,11 @@ import java.nio.file.Paths;
 
 import edu.javeriana.cad.CADExecuteFull;
 
+/**
+ * Función de acceso a las pruebas masivas de los equipos de AWS
+ * @author FelipeReyesPalacio
+ *
+ */
 public class MainExecuteFullTest {
 
 	public static void main(String[] args) {
